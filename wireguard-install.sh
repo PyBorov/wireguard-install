@@ -49,7 +49,7 @@ function checkOS() {
   	elif [[ ${OS} == "zorin" ]]; then
 		RELEASE_YEAR=$(echo "${VERSION_ID}" | cut -d'.' -f1)
 		if [[ ${RELEASE_YEAR} -lt 15 ]]; then
-			echo "Your version of Zorin (${VERSION_ID}) is not supported. Please use Ubuntu 18.04 or later"
+			echo "Your version of Zorin (${VERSION_ID}) is not supported. Please use Zorin 15 or later"
 			exit 1
 		fi
 	elif [[ ${OS} == "fedora" ]]; then
@@ -177,7 +177,7 @@ function installWireGuard() {
 	installQuestions
 
 	# Install WireGuard tools and module
-	if [[ ${OS} == 'ubuntu' ]] || [[ ${OS} == 'debian' && ${VERSION_ID} -gt 10 ]]; then
+	if [[ ${OS} == 'ubuntu' ]] || [[ ${OS} == 'debian' && ${VERSION_ID} -gt 10 ]] || [[ ${OS} == 'zorin' ]]; then
 		apt-get update
 		apt-get install -y wireguard iptables resolvconf qrencode
 	elif [[ ${OS} == 'debian' ]]; then
@@ -448,6 +448,8 @@ function uninstallWg() {
 		if [[ ${OS} == 'ubuntu' ]]; then
 			apt-get remove -y wireguard wireguard-tools qrencode
 		elif [[ ${OS} == 'debian' ]]; then
+			apt-get remove -y wireguard wireguard-tools qrencode
+   		elif [[ ${OS} == 'zorin' ]]; then
 			apt-get remove -y wireguard wireguard-tools qrencode
 		elif [[ ${OS} == 'fedora' ]]; then
 			dnf remove -y --noautoremove wireguard-tools qrencode
