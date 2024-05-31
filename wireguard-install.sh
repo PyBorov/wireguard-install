@@ -46,7 +46,7 @@ function checkOS() {
 			echo "Your version of Ubuntu (${VERSION_ID}) is not supported. Please use Ubuntu 18.04 or later"
 			exit 1
 		fi
-  	elif [[ ${OS} == "zorin"]]; then
+  	elif [[ ${OS} == "zorin" ]]; then
 		RELEASE_YEAR=$(echo "${VERSION_ID}" | cut -d'.' -f1)
 		if [[ ${RELEASE_YEAR} -lt 15 ]]; then
 			echo "Your version of Zorin (${VERSION_ID}) is not supported. Please use Ubuntu 18.04 or later"
